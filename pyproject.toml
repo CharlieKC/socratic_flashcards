@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "socratic-flashcards"
+version = "0.1.0"
+description = "LLM app to make flashcards from a socratic conversation"
+authors = ["Charlie Kruczko <charlie.kruczko@gmail.com>"]
+license = "MIT License"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+chainlit = "^0.7.0"
+jupyter = "^1.0.0"
+openai = "^0.28.0"
+requests = "^2.31.0"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^7.4.2"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
