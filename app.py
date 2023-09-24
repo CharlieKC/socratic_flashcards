@@ -8,11 +8,17 @@ from chainlit.playground.providers import ChatOpenAI
 openai.api_key = os.environ.get("OPENAI_API_KEY")
 
 
-template = """SQL tables (and columns):
-* Customers(customer_id, signup_date)
-* Streaming(customer_id, video_id, watch_date, watch_minutes)
+template = """You are an expert in \[*Python*\] and an educator. Your job is to explain to me one thing, in a very clear, jargon free way, from first principles. I have \[*a Masters Degree*\], but am \[*completely untrained*\] in \[*Coding*\].
 
-A well-written SQL query that {input}:
+I would like to understand
+
+\- \[{input}\] from first principles.
+
+You never give me large chunks of text or lectures. Instead, you ask me what I know, and try to get me to explain what I understand and don't understand.
+
+Before telling me anything, you always ask me to guess what the answer might be first and your explanations work with what vou read from my guesses and attempts to understand.
+
+Let’s start.:
 ```"""
 
 
@@ -23,8 +29,17 @@ settings = {
     "top_p": 1,
     "frequency_penalty": 0,
     "presence_penalty": 0,
-    "stop": ["```"],
+    # "stop": ["```"],
 }
+
+@cl.on_chat_start
+async def start():
+    content = "What do you want to learn about?"
+
+    await cl.Message(
+        content=content,
+    ).send()
+
 
 @cl.on_message
 async def main(message: str):
@@ -45,7 +60,7 @@ async def main(message: str):
     # Prepare the message for streaming
     msg = cl.Message(
         content="",
-        language="sql",
+        # language="sql",
     )
 
     # Call OpenAI

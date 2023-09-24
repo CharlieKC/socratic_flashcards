@@ -18,8 +18,8 @@ async def start():
         content=content,
     ).send()
     
-    res = await cl.AskUserMessage(content="What is your name?", timeout=10).send()
-    if res:
+    topic = await cl.AskUserMessage(content="What do you want to learn about?", timeout=10).send()
+    if topic:
         await cl.Message(
-            content=f"Your name is: {res['content']}",
+            content=f"You want to learn about: {topic['content']}",
         ).send()
