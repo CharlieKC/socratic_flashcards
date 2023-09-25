@@ -6,7 +6,7 @@ This needs `OPENAI_API_KEY` to be set.
 
 To run:
 
-```
+```sh
 export OPENAI_API_KEY=<YOUR_KEY>
 chainlit run app.py
 ```
