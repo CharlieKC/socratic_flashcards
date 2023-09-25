@@ -37,10 +37,6 @@ async def start():
     question = "What do you want to learn about?"
     res = await cl.AskUserMessage(content=question).send()
     if res:
-        # await cl.Message(
-        #     content=f"You want to learn about: {res['content']}",
-        # ).send()
-        
         user_session.set("topic", res['content'])
         
         system_message = PromptMessage(formatted=socratic_system_message, role="system")
